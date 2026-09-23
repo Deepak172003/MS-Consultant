@@ -23,8 +23,7 @@ import { ContactModule } from './contact/contact.module';
         password: config.get('DB_PASSWORD', 'postgres'),
         database: config.get('DB_NAME', 'ms_consultant'),
         autoLoadEntities: true,
-        // Dev convenience only — use migrations in production.
-        synchronize: true,
+        synchronize: config.get('DB_SYNCHRONIZE', 'true') === 'true',
       }),
     }),
     JobsModule,

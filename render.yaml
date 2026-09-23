@@ -1,0 +1,39 @@
+databases:
+  - name: ms-consultant-db
+    plan: free
+    databaseName: ms_consultant
+    user: ms_consultant
+
+services:
+  - type: web
+    name: ms-consultant-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: ms-consultant-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: ms-consultant-db
+          property: port
+      - key: DB_USERNAME
+        fromDatabase:
+          name: ms-consultant-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ms-consultant-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: ms-consultant-db
+          property: database
+      - key: DB_SYNCHRONIZE
+        value: "true"
+      - key: CORS_ORIGIN
+        sync: false

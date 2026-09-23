@@ -86,10 +86,15 @@ npm run dev                        # http://localhost:3000
 
 ## Deploying
 
-- **Frontend**: deploy `frontend/` to Vercel (or any Node host); set
-  `NEXT_PUBLIC_API_URL` to your deployed backend's `/api` URL.
-- **Backend**: deploy `backend/` to any Node host (Railway, Render, Fly.io,
-  an EC2 box, etc.); set the `DB_*` env vars to your managed Postgres instance,
-  and turn off `synchronize` in `app.module.ts` in favor of migrations once
-  you're past local development.
-- **Database**: any managed PostgreSQL (Supabase, Neon, RDS, Railway Postgres…).
+The repository includes `render.yaml` for the backend and a managed PostgreSQL
+database on Render.
+
+1. In Render, create a new Blueprint from this repository and set `CORS_ORIGIN`
+  to the final Vercel URL when prompted.
+2. In Vercel, import this repository with the root directory set to `frontend`.
+  Set `NEXT_PUBLIC_API_URL` to the Render API URL followed by `/api`.
+3. Update the Render service's `CORS_ORIGIN` to the Vercel deployment URL and
+  redeploy the API.
+
+`DB_SYNCHRONIZE=true` is included for the first deployment so TypeORM creates
+the tables. Set it to `false` after adding a migration workflow.
