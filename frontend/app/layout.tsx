@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'MS Consultant — Careers & Coaching',
   description:
-    'MS Consultant connects teachers and students across Jharkhand with the right faculty roles and the right coaching courses.',
+    'MS Consultant connects teachers and students across Over all India with the right faculty roles and the right coaching courses.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
